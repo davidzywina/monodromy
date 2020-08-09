@@ -1,5 +1,6 @@
 /*
-The following is an implementation of some of the results from "Computing monodromy of abelian varieties".
+The following is an implementation of some of the results from the paper "Computing monodromy of abelian varieties" 
+See http://pi.math.cornell.edu/~zywina/papers/Monodromy/Monodromy.pdf
 */
 
 
@@ -30,7 +31,6 @@ When we can identify T with a maximal torus of a Mumford-Tate group MT, the reco
 
 FrobTorusRec := recformat< P:RngUPolElt, q:RngIntElt,  roots,mult,R,lie,Delta,EndC:SeqEnum, Gamma, W:GrpPerm, X:ModED, 
                            iota:Map, phi:HomGrp, free,ordinary:BoolElt, g,rank, dimMT, dimEnd:RngIntElt>;
-
 
 
 // Note:        In Magma, groups usually act on the right (while they act on the left in the paper).  
@@ -463,7 +463,6 @@ function ComputeEnd(T)
 end function;
 
 
-
 procedure PrintFrobTorusInfo(T)
     // For a Frobenius torus T, i.e., a record of type "FrobTorusRec", we output some information.
     
@@ -483,58 +482,6 @@ procedure PrintFrobTorusInfo(T)
         print "Pairs (d_i,m_i) :"; End;
     end if;
 end procedure;
-
-
-
-
-procedure Experimental(f: a:=[1,1],range:=[50,100])
-
-
-    // We compute a set S of Frobenius polynomials of a fixed hyperelliptic curve.
-    Pol<x>:=PolynomialRing(Integers());
-    //f:=(3*x^4-6*x^2+x+1)*(x^2+1);  
-    //f:=x*(x^8+7*x^6-7*x^2-1);
-    //f:=x*(x^16+7*x^14+2*x^12+x^10-x^6-2*x^4-7*x^2-1);
-    //f:=(x^4-1)*(x^4-4)*(x^2+3)*(2*x^2-7)*((4*x^2)^2-1)*(7*x^2+8);
-    f:=Pol!f;
-
-    PP:=[p: p in PrimesUpTo(range[2]) | p ge range[1] and p mod a[2] eq a[1] mod a[2]]; 
-
-    S:=[];
-    for p in PP do  
-        fp:=ChangeRing(f,GF(p));    
-        if p ne 2 and Degree(fp) eq Degree(f) and IsSeparable(fp) then
-            C:=HyperellipticCurve(fp); 
-            S:=S cat [Pol!LPolynomial(C)]; 
-        end if;
-    end for;
-
-    S;
-    flag, T:=ComputeRootDatumOfMT(S :Proof:=false);
-    if flag then
-        PrintFrobTorusInfo(T);
-    end if;
-
-
-
-end procedure;        
-
-
-Pol<x>:=PolynomialRing(Integers());
-f:=(3*x^4-6*x^2+x+1)*(x^2+1); 
-f:=x*(x^16+7*x^14+2*x^12+x^10-x^6-2*x^4-7*x^2-1);
-//Experimental(f: a:=[1,4],range:=[50,100]);
-
-
-
-
-
-    //f:=x*(x^8+7*x^6-7*x^2-1);
-    //f:=x*(x^16+7*x^14+2*x^12+x^10-x^6-2*x^4-7*x^2-1);
-    //f:=(x^4-1)*(x^4-4)*(x^2+3)*(2*x^2-7)*((4*x^2)^2-1)*(7*x^2+8);
-
-
-
 
 
 
