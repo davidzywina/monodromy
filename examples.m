@@ -1,5 +1,7 @@
 /*  
-  Below are some examples using the functions from "monodromy.m".   Frobenius polynomials have been precomputed for these examples.
+  Below are some basic examples using the functions from "monodromy.m".   
+  Note that Frobenius polynomials have been precomputed for these examples.   
+  Running on http://magma.maths.usyd.edu.au/calc/ this takes less than 3 seconds.
 */
 
 Pol<t>:=PolynomialRing(Rationals());
