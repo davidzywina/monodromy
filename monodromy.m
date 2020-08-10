@@ -471,9 +471,10 @@ procedure PrintFrobTorusInfo(T)
         print "dim(MT) =",T`dimMT;
         print "rank(MT) =",T`rank;
         print "Dyn(MT) =",T`lie;
+        print "Index of W in Gamma=", #T`Gamma div #T`W;
         print "Orbits of weights under Gamma =",[Set(A): A in Orbits(T`Gamma)];
         print "Orbits of weights under W =",[Set(A): A in Orbits(T`W)];
-        print "multiplicities =",T`mult;
+        print "multiplicity of weights =",T`mult;
 
         dim, End:=ComputeEnd(T); " ";
         print "Over Qbar, A is isogenous to a product of A_i that are powers of pairwise nonisogenous simple abelian varieties." ;
