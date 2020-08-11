@@ -282,12 +282,13 @@ function ComputeRoots(T)
     end function;
 
     // We now find the roots and their decomposition into irreducible root systems.
-    lie:=[]; R:=[];  Delta:=[];
+    lie:=[]; R:=[];  Delta:=[]; weyl_card:=1;
     for i in [1..#SS] do
         S:=SS[i];
         V0:=sub<V|[Coordinates(X,a): a in S]>;
         r:=Dimension(V0);
         weyl:=#W div #&meet[Stabilizer(W,U1_,a): a in S]; 
+        weyl_card:=weyl_card*weyl;
         Orb0:=[Set(O): O in Orb | O subset S];
 
         if r ge 1 and weyl eq Factorial(r+1) then
@@ -332,6 +333,11 @@ function ComputeRoots(T)
         R:=R cat [R0]; 
     end for;
 
+    // The Weyl group W should be the product of the Weyl groups of the irreducible components that we found.  
+    if weyl_card ne #W then              
+        return false, T;
+    end if;
+    
     T`lie:=lie;  T`R:=R;  T`Delta:=Delta;    
     T`dimMT:=&+([#R0: R0 in R] cat [T`rank]);
 
