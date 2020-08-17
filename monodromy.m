@@ -1,5 +1,5 @@
 /*
-The following is an implementation of some of the results from the paper "Computing monodromy of abelian varieties" 
+The following is an implementation of some of the results from the paper "Determining monodromy of abelian varieties" 
 See http://pi.math.cornell.edu/~zywina/papers/Monodromy/Monodromy.pdf
 */
 
