@@ -367,12 +367,13 @@ function ComputeRootDatumOfMT(S :Proof:=false)
         T:=ComputeFrobeniusTorus(P :Q:=1, Proof:=Proof);
         if T`ordinary and T`free then
             TT:=TT cat [T]; 
-
-            // We can recognize when we have full GSp_2g monodromy from a single torus. 
-            if T`rank eq g+1 and #T`Gamma eq 2^g*Factorial(g) then
-                    flag,T:= ComputeRoots(T);
-                    return flag, T;
-            end if;
+            /*  The following code is commented out for now because it failed to work properly for some case with g=3
+                // We can recognize when we have full GSp_2g monodromy from a single torus. 
+                if T`rank eq g+1 and #T`Gamma eq 2^g*Factorial(g) then
+                        flag,T:= ComputeRoots(T);
+                        return flag, T;
+                end if;
+            */
         end if;
     end for;
     if #TT lt 2 then return false, []; end if;  // Not enough suitable polynomials in S
